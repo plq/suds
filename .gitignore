@@ -1,2 +1,6 @@
 *.pyc
 *.pyo
+
+# eclipse cruft
+.project
+.pydevproject
