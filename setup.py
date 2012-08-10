@@ -30,4 +30,5 @@ setup(
     maintainer_email="jortel@redhat.com",
     packages=find_packages(exclude=['tests']),
     url="https://fedorahosted.org/suds",
+    include_package_data=True
 )
