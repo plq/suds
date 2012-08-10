@@ -293,6 +293,7 @@ class Binding:
         """
         env = Element('Envelope', ns=envns)
         env.addPrefix(Namespace.xsins[0], Namespace.xsins[1])
+        env.addPrefix(Namespace.xsdns[0], Namespace.xsdns[1])
         env.append(header)
         env.append(body)
         return env

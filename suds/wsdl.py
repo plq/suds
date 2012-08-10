@@ -722,7 +722,15 @@ class Binding(NamedObject):
             ref = qualify(mn, self.root, definitions.tns)
             message = definitions.messages.get(ref)
             if message is None:
-                raise Exception, "message'%s', not-found" % mn
+                ref = list(ref)
+                ref[1] = definitions.tns[1]
+                ref = tuple(ref)
+
+                message = definitions.messages.get(ref)
+
+            if message is None:
+                raise Exception, "message %r (%r), not-found" % (mn,ref)
+
             pn = header.part
             for p in message.parts:
                 if p.name == pn:

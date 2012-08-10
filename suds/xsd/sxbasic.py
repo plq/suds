@@ -490,9 +490,9 @@ class Import(SchemaObject):
     def __init__(self, schema, root):
         SchemaObject.__init__(self, schema, root)
         self.ns = (None, root.get('namespace'))
-        self.location = root.get('schemaLocation')
+        self.location = self.locations.get(self.ns[1], None)
         if self.location is None:
-            self.location = self.locations.get(self.ns[1])
+            self.location = root.get('schemaLocation')
         self.opened = False
         
     def open(self, options):
@@ -795,3 +795,13 @@ Import.bind(
 Import.bind(
     'http://www.w3.org/2001/XMLSchema',
     'http://www.w3.org/2001/XMLSchema.xsd')
+
+
+from pkg_resources import resource_filename
+import os.path
+xml_schema_file_path = os.path.abspath(resource_filename('suds.xsd', 'XMLSchema.xsd'))
+namespace_schema_file_path = os.path.abspath(resource_filename('suds.xsd', 'xml.xsd'))
+
+# overrides the above
+Import.bind('http://www.w3.org/2001/XMLSchema', 'file://%s' % xml_schema_file_path)
+Import.bind('http://www.w3.org/XML/1998/namespace', 'file://%s' % namespace_schema_file_path)
