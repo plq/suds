@@ -26,7 +26,7 @@ import sys
 # Project properties
 #
 
-__version__ = '0.3.9'
+__version__ = '0.3.9-burak'
 __build__="GA R659-20100219"
 
 #
