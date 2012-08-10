@@ -254,9 +254,7 @@ class Time:
         return unicode(self)
     
     def __unicode__(self):
-        time = self.time.isoformat()
-        return '%s%+.2d:00' % (time, Timezone.local)
-
+        return self.time.isoformat()
 
 class DateTime(Date,Time):
     """
@@ -279,7 +277,8 @@ class DateTime(Date,Time):
         """
         if isinstance(date, dt.datetime):
             Date.__init__(self, date.date())
-            Time.__init__(self, date.time())
+            Time.__init__(self, date.timetz())
+
             self.datetime = \
                 dt.datetime.combine(self.date, self.time)
             return
