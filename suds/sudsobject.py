@@ -154,6 +154,8 @@ class Object:
         return getattr(self, name)
     
     def __setitem__(self, name, value):
+        if isinstance(name, int):
+            name = self.__keylist__[int(name)]
         setattr(self, name, value)
         
     def __iter__(self):
